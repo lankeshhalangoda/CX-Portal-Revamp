@@ -270,45 +270,79 @@ export function EmojotDashboard() {
               }}
             />
 
-            {/* Collateral Sub-items */}
+            {/* Collateral Sub-items with Branch UI */}
             {collateralExpanded && (
-              <div className="ml-6 space-y-1 animate-in slide-in-from-top-2 duration-200">
-                <SubNavItem
-                  icon={BookOpen}
-                  label="Case Studies"
-                  active={activeNav === "case-studies"}
-                  onClick={() => {
-                    setActiveNav("case-studies")
-                    if (isMobile) setMobileMenuOpen(false)
-                  }}
-                />
-                <SubNavItem
-                  icon={FileImage}
-                  label="Brochures"
-                  active={activeNav === "brochures"}
-                  onClick={() => {
-                    setActiveNav("brochures")
-                    if (isMobile) setMobileMenuOpen(false)
-                  }}
-                />
-                <SubNavItem
-                  icon={Presentation}
-                  label="Presentations"
-                  active={activeNav === "presentations"}
-                  onClick={() => {
-                    setActiveNav("presentations")
-                    if (isMobile) setMobileMenuOpen(false)
-                  }}
-                />
-                <SubNavItem
-                  icon={Video}
-                  label="Videos"
-                  active={activeNav === "videos"}
-                  onClick={() => {
-                    setActiveNav("videos")
-                    if (isMobile) setMobileMenuOpen(false)
-                  }}
-                />
+              <div className="ml-6 space-y-0 animate-in slide-in-from-top-2 duration-200">
+                <div className="relative">
+                  {/* Vertical line */}
+                  <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-300"></div>
+
+                  {/* Case Studies */}
+                  <div className="relative flex items-center">
+                    <div className="absolute left-0 top-1/2 w-3 h-px bg-gray-300"></div>
+                    <div className="ml-4">
+                      <SubNavItem
+                        icon={BookOpen}
+                        label="Case Studies"
+                        active={activeNav === "case-studies"}
+                        onClick={() => {
+                          setActiveNav("case-studies")
+                          if (isMobile) setMobileMenuOpen(false)
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Brochures */}
+                  <div className="relative flex items-center">
+                    <div className="absolute left-0 top-1/2 w-3 h-px bg-gray-300"></div>
+                    <div className="ml-4">
+                      <SubNavItem
+                        icon={FileImage}
+                        label="Brochures"
+                        active={activeNav === "brochures"}
+                        onClick={() => {
+                          setActiveNav("brochures")
+                          if (isMobile) setMobileMenuOpen(false)
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Presentations */}
+                  <div className="relative flex items-center">
+                    <div className="absolute left-0 top-1/2 w-3 h-px bg-gray-300"></div>
+                    <div className="ml-4">
+                      <SubNavItem
+                        icon={Presentation}
+                        label="Presentations"
+                        active={activeNav === "presentations"}
+                        onClick={() => {
+                          setActiveNav("presentations")
+                          if (isMobile) setMobileMenuOpen(false)
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Videos - Last item */}
+                  <div className="relative flex items-center">
+                    <div className="absolute left-0 top-1/2 w-3 h-px bg-gray-300"></div>
+                    {/* Corner for last item */}
+                    <div className="absolute left-0 top-1/2 bottom-0 w-px bg-white"></div>
+                    <div className="ml-4">
+                      <SubNavItem
+                        icon={Video}
+                        label="Videos"
+                        active={activeNav === "videos"}
+                        onClick={() => {
+                          setActiveNav("videos")
+                          if (isMobile) setMobileMenuOpen(false)
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -766,6 +800,33 @@ export function EmojotDashboard() {
   )
 }
 
+function SubNavItem({
+  icon: Icon,
+  label,
+  active = false,
+  onClick,
+}: {
+  icon: any
+  label: string
+  active?: boolean
+  onClick?: () => void
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all duration-200 text-sm relative",
+        active
+          ? "bg-gradient-to-r from-blue-900 via-blue-700 to-pink-500 text-white shadow-lg"
+          : "text-gray-500 hover:bg-gray-50 hover:text-gray-700",
+      )}
+    >
+      <Icon className="h-4 w-4 flex-shrink-0" />
+      <span className="font-medium">{label}</span>
+    </button>
+  )
+}
+
 function NavItem({
   icon: Icon,
   label,
@@ -798,33 +859,6 @@ function NavItem({
           <ChevronRight className="h-4 w-4" />
         </div>
       )}
-    </button>
-  )
-}
-
-function SubNavItem({
-  icon: Icon,
-  label,
-  active = false,
-  onClick,
-}: {
-  icon: any
-  label: string
-  active?: boolean
-  onClick?: () => void
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all duration-200 text-sm",
-        active
-          ? "bg-gradient-to-r from-blue-900 via-blue-700 to-pink-500 text-white shadow-lg"
-          : "text-gray-500 hover:bg-gray-50 hover:text-gray-700",
-      )}
-    >
-      <Icon className="h-4 w-4 flex-shrink-0" />
-      <span className="font-medium">{label}</span>
     </button>
   )
 }
